@@ -1,5 +1,10 @@
 
-namespace MonoSims.Engine;
+using System;
+using System.IO;
+using System.Text.Json;
+
+
+namespace MonoSims.Engine.Settings;
 
 public enum Language
 {
@@ -7,12 +12,33 @@ public enum Language
 }
 public static class GlobalSettingsManager
 {
-	public static SettingsObject Settings { private get; set; } = new SettingsObject();
+	private static SettingsObject _settings;
+
+	public static SettingsObject Settings
+	{
+		get
+		{
+			if (_settings == null)
+			{
+				_settings = LoadSettings();
+			}
+			return _settings;
+		}
+		private set
+		{
+			_settings = value;
+			SaveSettings();
+		}
+	}
 
 	public static Language Language
 	{
 		get => (Language)Settings.Language;
-		set => Settings.Language = (int)value;
+		set
+		{
+			Settings.Language = (int)value;
+			SaveSettings();
+		}
 	}
 
 	public static int MasterVolume
@@ -32,8 +58,8 @@ public static class GlobalSettingsManager
 			{
 				Settings.MasterVolume = value;
 			}
-			App.AudioManager.EffectVolume = (Settings.MasterVolume / 100f) * (Settings.SfxVolume / 100f);
-			App.AudioManager.MusicVolume = (Settings.MasterVolume / 100f) * (Settings.MusicVolume / 100f);
+			App.AudioManager.ChangeMusicVolume();
+			SaveSettings();
 		}
 	}
 
@@ -54,7 +80,8 @@ public static class GlobalSettingsManager
 			{
 				Settings.MusicVolume = value;
 			}
-			App.AudioManager.MusicVolume = (Settings.MasterVolume / 100f) * (Settings.MusicVolume / 100f);
+			App.AudioManager.ChangeMusicVolume();
+			SaveSettings();
 		}
 	}
 
@@ -75,7 +102,39 @@ public static class GlobalSettingsManager
 			{
 				Settings.SfxVolume = value;
 			}
-			App.AudioManager.EffectVolume = (Settings.MasterVolume / 100f) * (Settings.SfxVolume / 100f);
+			SaveSettings();
+		}
+	}
+
+	private static string _saveFilePath = "./Settings.json";
+	public static void SaveSettings()
+	{
+		Console.WriteLine("Saving settings...");
+		try
+		{
+			string json = JsonSerializer.Serialize(Settings);
+			Console.WriteLine($"Settings JSON: {json}");
+			File.WriteAllText(_saveFilePath, json);
+			Console.WriteLine("Settings saved successfully.");
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error saving settings: {ex.Message}");
+		}
+	}
+
+	public static SettingsObject LoadSettings()
+	{
+		try
+		{
+			string json = File.ReadAllText(_saveFilePath);
+			Settings = JsonSerializer.Deserialize<SettingsObject>(json);
+			return Settings ?? new SettingsObject();
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error loading settings: {ex.Message}");
+			return new SettingsObject();
 		}
 	}
 }

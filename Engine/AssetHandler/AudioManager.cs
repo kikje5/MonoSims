@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
+using MonoSims.Engine.Settings;
 
 namespace MonoSims.Engine;
 
@@ -21,18 +22,15 @@ public sealed class AudioManager
     private readonly Dictionary<string, SoundEffect> soundEffects = new Dictionary<string, SoundEffect>();
 
 
-    private float musicVolume { get; set; } = 0.5f;
 
     public float MusicVolume
     {
-        get => musicVolume;
-        set
-        {
-            musicVolume = value;
-            MediaPlayer.Volume = musicVolume;
-        }
+        get => GlobalSettingsManager.Settings.MusicVolume * 0.01f * GlobalSettingsManager.Settings.MasterVolume * 0.01f;
     }
-    public float EffectVolume { get; set; } = 0.5f;
+    public float EffectVolume
+    {
+        get => GlobalSettingsManager.Settings.SfxVolume * 0.01f * GlobalSettingsManager.Settings.MasterVolume * 0.01f;
+    }
 
     public string SongCurrentlyPlaying = string.Empty;
 
@@ -43,6 +41,7 @@ public sealed class AudioManager
     {
         LoadSoundEffects(contentManager);
         LoadSongs();
+        ChangeMusicVolume();
     }
 
     private void LoadSoundEffects(ContentManager contentManager)
@@ -138,7 +137,7 @@ public sealed class AudioManager
     /// </summary>
     public void ChangeMusicVolume()
     {
-        MediaPlayer.Volume = musicVolume;
+        MediaPlayer.Volume = MusicVolume;
     }
 
     /// <summary>

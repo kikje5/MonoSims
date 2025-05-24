@@ -1,6 +1,7 @@
 using MonoSims.Engine;
 using MonoSims.Engine.UI;
 using Microsoft.Xna.Framework;
+using MonoSims.Engine.Settings;
 
 namespace MonoSims.Screens;
 
@@ -39,7 +40,7 @@ public class SettingsScreen : Screen
 		masterVolumeButton.Text = "Master Volume: " + GlobalSettingsManager.MasterVolume;
 		masterVolumeButton.Clicked += () =>
 		{
-			GlobalSettingsManager.MasterVolume = GlobalSettingsManager.MasterVolume + 10;
+			GlobalSettingsManager.MasterVolume += 10;
 			masterVolumeButton.Text = "Master Volume: " + GlobalSettingsManager.MasterVolume;
 		};
 		Add(masterVolumeButton);
@@ -48,7 +49,7 @@ public class SettingsScreen : Screen
 		musicVolumeButton.Text = "Music Volume: " + GlobalSettingsManager.MusicVolume;
 		musicVolumeButton.Clicked += () =>
 		{
-			GlobalSettingsManager.MusicVolume = GlobalSettingsManager.MusicVolume + 10;
+			GlobalSettingsManager.MusicVolume += 10;
 			musicVolumeButton.Text = "Music Volume: " + GlobalSettingsManager.MusicVolume;
 		};
 		Add(musicVolumeButton);

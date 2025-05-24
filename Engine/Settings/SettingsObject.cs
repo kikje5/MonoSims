@@ -1,10 +1,9 @@
-namespace MonoSims.Engine
+namespace MonoSims.Engine.Settings;
+
+public class SettingsObject
 {
-	public class SettingsObject
-	{
-		public int Language { get; set; } = 0;
-		public int MasterVolume { get; set; } = 50;
-		public int MusicVolume { get; set; } = 100;
-		public int SfxVolume { get; set; } = 100;
-	}
+	public int Language { get; set; } = 0;
+	public int MasterVolume { get; set; } = 50;
+	public int MusicVolume { get; set; } = 100;
+	public int SfxVolume { get; set; } = 100;
 }
