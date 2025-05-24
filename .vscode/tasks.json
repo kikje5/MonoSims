@@ -1,0 +1,52 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/MonoSims.sln",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary;ForceNoAlign"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "publish",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"publish",
+				"${workspaceFolder}/MonoSims.sln",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary;ForceNoAlign",
+				"-c",
+				"Release"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "watch",
+			"command": "dotnet",
+			"type": "process",
+			"args": ["watch", "run", "--project", "${workspaceFolder}/MonoSims.sln"],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "MonoGame Content Builder (MGCB)",
+			"command": "dotnet",
+			"type": "process",
+			"args": ["mgcb-editor", "${workspaceFolder}/Content/Content.mgcb"],
+			"options": {
+				"cwd": "${workspaceFolder}/game"
+			},
+			"problemMatcher": []
+		}
+	]
+}

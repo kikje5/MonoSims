@@ -87,7 +87,7 @@ public sealed class AudioManager
     /// Play song from the song dictionary
     /// </summary>
     /// <param name="assetName">
-    /// Song file to start playing, without the extension. This name should be the samen as the file name.
+    /// Song file to start playing, without the extension. This name should be the same as the file name.
     /// </param>
     /// <param name="repeat">
     /// Whether or not the song should repeat.
@@ -136,7 +136,7 @@ public sealed class AudioManager
     /// <summary>
     /// Sets the music volume with the <see cref="musicVolume" /> property.
     /// </summary>
-    public void ChangemusicVolume()
+    public void ChangeMusicVolume()
     {
         MediaPlayer.Volume = musicVolume;
     }

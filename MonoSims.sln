@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blok3Game", "Blok3Game.csproj", "{CFB44ECF-90F4-4652-879C-C4D12EAB2988}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoSims", "MonoSims.csproj", "{CFB44ECF-90F4-4652-879C-C4D12EAB2988}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
