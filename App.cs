@@ -21,6 +21,9 @@ public class App : Game
 
     public static Point screen;
 
+    public static bool DoClear = true;
+
+
     public static Color BackgroundColor = new Color(32, 32, 32, 255);
 
     public App()
@@ -40,7 +43,8 @@ public class App : Game
         SpriteScale = Matrix.CreateScale(1, 1, 1);
         Random = new Random();
 
-        screen = new Point(960, 540);
+        screen = new Point(1920, 1080);
+
         ApplyResolutionSettings(true, true);
     }
 
@@ -130,13 +134,18 @@ public class App : Game
 
     protected override void Update(GameTime gameTime)
     {
+        if (!IsActive) return;
         HandleInput();
         ScreenManager.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(BackgroundColor);
+        if (!IsActive) return;
+        if (DoClear)
+        {
+            GraphicsDevice.Clear(BackgroundColor);
+        }
         SpriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, SpriteScale);
         ScreenManager.Draw(gameTime, SpriteBatch);
         SpriteBatch.End();

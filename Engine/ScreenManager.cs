@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BoidSim.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoSims.Screens;
@@ -31,8 +32,8 @@ public class ScreenManager : ILoopObject
 		AddScreen(TITLE_SCREEN, new TitleScreen());
 		AddScreen(SETTINGS_SCREEN, new SettingsScreen());
 		AddScreen(SIMULATION_SELECTION_SCREEN, new SimSelectScreen());
-		//AddScreen(BOIDS_SCREEN, new BoidsScreen());
-		//AddScreen(PLANETS_SCREEN, new PlanetsScreen());
+		AddScreen(BOIDS_SCREEN, new BoidSimScreen());
+		//AddScreen(PLANETS_SCREEN, new PlanetSimScreen());
 	}
 
 	public void AddScreen(string name, Screen state)

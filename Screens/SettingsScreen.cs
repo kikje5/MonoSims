@@ -15,19 +15,23 @@ public class SettingsScreen : Screen
 	private TextElement settingsText;
 	public SettingsScreen()
 	{
-		int ButtonWidth = 256 - 32;
+		int ButtonWidth = 512;
 		int ButtonHeight = ButtonWidth / 4;
 
-		int ButtonSpacing = 80;
-		int ButtonYStart = 160;
-		int ButtonX = 480;
+		int ButtonSpacing = ButtonHeight + 64;
+		int ButtonYStart = 256 + 128;
+		int centerX = 960;
+		int ButtonX1 = 960 - ButtonWidth / 2 - 64;
+		int ButtonX2 = 960 + ButtonWidth / 2 + 64;
+
+		Vector2 buttonSize = new Vector2(ButtonWidth, ButtonHeight);
 
 		settingsText = new TextElement("Fonts/TitleFont");
 		settingsText.Text = "Settings";
-		settingsText.Position = new Vector2(ButtonX, 64);
+		settingsText.Position = new Vector2(centerX, 128);
 		Add(settingsText);
 
-		languageButton = new Button(new Vector2(ButtonX, ButtonYStart), new Vector2(ButtonWidth, ButtonHeight));
+		languageButton = new Button(new Vector2(ButtonX1, ButtonYStart), buttonSize);
 		languageButton.Text = "Language: " + GlobalSettingsManager.Language.ToString();
 		languageButton.Clicked += () =>
 		{
@@ -36,7 +40,7 @@ public class SettingsScreen : Screen
 		};
 		Add(languageButton);
 
-		masterVolumeButton = new Button(new Vector2(ButtonX, ButtonYStart + ButtonSpacing), new Vector2(ButtonWidth, ButtonHeight));
+		masterVolumeButton = new Button(new Vector2(ButtonX2, ButtonYStart), buttonSize);
 		masterVolumeButton.Text = "Master Volume: " + GlobalSettingsManager.MasterVolume;
 		masterVolumeButton.Clicked += () =>
 		{
@@ -45,7 +49,7 @@ public class SettingsScreen : Screen
 		};
 		Add(masterVolumeButton);
 
-		musicVolumeButton = new Button(new Vector2(ButtonX, ButtonYStart + ButtonSpacing * 2), new Vector2(ButtonWidth, ButtonHeight));
+		musicVolumeButton = new Button(new Vector2(ButtonX2, ButtonYStart + ButtonSpacing * 1), buttonSize);
 		musicVolumeButton.Text = "Music Volume: " + GlobalSettingsManager.MusicVolume;
 		musicVolumeButton.Clicked += () =>
 		{
@@ -54,7 +58,7 @@ public class SettingsScreen : Screen
 		};
 		Add(musicVolumeButton);
 
-		sfxVolumeButton = new Button(new Vector2(ButtonX, ButtonYStart + ButtonSpacing * 3), new Vector2(ButtonWidth, ButtonHeight));
+		sfxVolumeButton = new Button(new Vector2(ButtonX2, ButtonYStart + ButtonSpacing * 2), buttonSize);
 		sfxVolumeButton.Text = "SFX Volume: " + GlobalSettingsManager.SFXVolume;
 		sfxVolumeButton.Clicked += () =>
 		{
@@ -63,7 +67,7 @@ public class SettingsScreen : Screen
 		};
 		Add(sfxVolumeButton);
 
-		backButton = new Button(new Vector2(ButtonX, ButtonYStart + ButtonSpacing * 4), new Vector2(ButtonWidth, ButtonHeight));
+		backButton = new Button(new Vector2(centerX, ButtonYStart + ButtonSpacing * 3), buttonSize);
 		backButton.Text = "Go Back";
 		backButton.Clicked += () => App.ScreenManager.SwitchTo(ScreenManager.TITLE_SCREEN);
 		Add(backButton);

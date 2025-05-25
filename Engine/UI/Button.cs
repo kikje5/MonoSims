@@ -49,8 +49,13 @@ public class Button : UIElement
 				isClicked = false;
 				OnClicked();
 			}
+			else if (inputHelper.MouseLeftButtonDown)
+			{
+				UIElementState = UIElementMouseState.Pressed;
+			}
 			else
 			{
+				isClicked = false;
 				UIElementState = UIElementMouseState.Hover;
 			}
 		}
